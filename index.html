@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini-Quiz sull’IA – Interazione JavaScript</title>
+    <style>
+        /* CSS per una presentazione pulita */
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+            background-color: #f4f4f9;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #007bff;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #1e7e34;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Mini-Quiz sull’IA – Interazione JavaScript</h1>
+        <p>Clicca sul pulsante per iniziare il quiz! Le domande appariranno tramite finestra pop-up.</p>
+        
+        <button onclick="startQuiz()">Inizia il Quiz 🧠</button>
+    </div>
+
+    <script>
+        /**
+         * Logica del Mini-Quiz che utilizza prompt() e alert()
+         */
+
+        // Array di oggetti con 10 domande focalizzate su Informatica e IA
+        const questions = [
+            {
+                q: "Domanda 1: Quale sigla rappresenta il 'cervello' che esegue i calcoli nel computer? (Risposta esatta: CPU)",
+                a: "CPU"
+            },
+            {
+                q: "Domanda 2: L'IA che simula conversazioni umane si chiama: (Risposta esatta: Chatbot)",
+                a: "Chatbot"
+            },
+            {
+                q: "Domanda 3: Quale acronimo indica il linguaggio standard per la creazione della struttura delle pagine web? (Risposta esatta: HTML)",
+                a: "HTML"
+            },
+            {
+                q: "Domanda 4: La RAM viene usata per archiviare i dati in modo permanente? (Rispondi: VERO o FALSO)",
+                a: "FALSO"
+            },
+            {
+                q: "Domanda 5: Il processo che permette ai programmi di IA di migliorare automaticamente analizzando dati si chiama: (Risposta esatta: Machine Learning)",
+                a: "Machine Learning"
+            },
+            {
+                q: "Domanda 6: Il codice binario usa la cifra 0 e quale altra cifra? (Risposta esatta: 1)",
+                a: "1"
+            },
+            {
+                q: "Domanda 7: Se lavori su un file salvato online e accessibile ovunque, stai usando il Cloud Computing? (Rispondi: VERO o FALSO)",
+                a: "VERO"
+            },
+            {
+                q: "Domanda 8: L'insieme delle regole che descrive i passaggi precisi per risolvere un problema è chiamato: (Risposta esatta: Algoritmo)",
+                a: "Algoritmo"
+            },
+            {
+                q: "Domanda 9: Quale di questi non è un linguaggio di programmazione: JavaScript, Python, o Windows? (Risposta esatta: Windows)",
+                a: "Windows"
+            },
+            {
+                q: "Domanda 10: Cosa significa l'acronimo 'IA'? (Risposta esatta: Intelligenza Artificiale)",
+                a: "Intelligenza Artificiale"
+            }
+        ];
+
+        let score = 0;
+        const totalQuestions = questions.length;
+
+        function startQuiz() {
+            score = 0; // Azzera il punteggio ad ogni avvio
+            alert("🚀 Iniziamo il Mini-Quiz! Rispondi con la parola o la sigla richiesta.");
+
+            // Cicla attraverso tutte le domande
+            for (let i = 0; i < totalQuestions; i++) {
+                const currentQ = questions[i];
+                
+                // Pone la domanda e richiede una risposta (tramite prompt)
+                let userAnswer = prompt(currentQ.q);
+                
+                // Gestisce l'annullamento o la risposta vuota
+                if (userAnswer === null || userAnswer.trim() === "") {
+                    alert("Hai saltato la domanda. Passiamo alla successiva!");
+                    continue;
+                }
+
+                // Normalizza la risposta per il confronto (rimuove spazi e rende maiuscola)
+                userAnswer = userAnswer.trim().toUpperCase(); 
+                const correctAnswer = currentQ.a.toUpperCase();
+
+                // Verifica la risposta e fornisce feedback personalizzato (tramite alert)
+                if (userAnswer === correctAnswer) {
+                    score++;
+                    alert("✅ CORRETTO! Ottimo lavoro!");
+                } else {
+                    alert(`❌ ERRATO. La risposta corretta era: ${currentQ.a}.`);
+                }
+            }
+
+            // Messaggio finale personalizzato
+            let finalMessage;
+            if (score === totalQuestions) {
+                finalMessage = "👑 STRAORDINARIO! Punteggio Perfetto! Sei un fuoriclasse! 🚀";
+            } else if (score >= 7) {
+                finalMessage = `🏆 Risultato Eccellente! Hai totalizzato ${score} su ${totalQuestions}.`;
+            } else if (score >= 4) {
+                finalMessage = `👍 Ben fatto! Hai risposto correttamente a ${score} domande su ${totalQuestions}.`;
+            } else {
+                finalMessage = `🤔 Puoi fare meglio! Hai totalizzato ${score} su ${totalQuestions}. Rivedi le basi e riprova!`;
+            }
+            
+            alert(`Quiz Terminato!\nIl tuo punteggio finale è: ${score} / ${totalQuestions}\n\n${finalMessage}`);
+        }
+    </script>
+    </body>
+</html>
